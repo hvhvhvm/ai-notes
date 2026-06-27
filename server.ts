@@ -5,12 +5,26 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { createClient } from "@supabase/supabase-js";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DB_FILE = path.join(process.cwd(), "db.json");
+
+app.use(cors({
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://ai-notes-saicharanreddykandi-7709s-projects.vercel.app"
+  ],
+  credentials: true,
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type","Authorization"]
+}));
+
+app.options("*", cors());
 
 // Increase body parser limits for base64 uploads
 app.use(express.json({ limit: "50mb" }));
@@ -259,44 +273,75 @@ const backendSupabase = hasBackendSupabase
   : null;
 
 // Middleware to authenticate requests
-const authenticateUser = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+const authenticateUser = async (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) => {
+  // Allow CORS preflight requests
+  if (req.method === "OPTIONS") {
+    return next();
+  }
+
   const authHeader = req.headers.authorization;
+
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Unauthorized access. Please log in." });
+    return res.status(401).json({
+      error: "Unauthorized access. Please log in."
+    });
   }
 
   const token = authHeader.split(" ")[1];
+
   if (!token) {
-    return res.status(401).json({ error: "Missing authentication token" });
+    return res.status(401).json({
+      error: "Missing authentication token"
+    });
   }
 
   if (backendSupabase) {
     try {
-      const { data: { user }, error } = await backendSupabase.auth.getUser(token);
+      const {
+        data: { user },
+        error,
+      } = await backendSupabase.auth.getUser(token);
+
       if (error || !user) {
-        // Fallback for offline simulated mode users
         if (token.startsWith("usr-")) {
           (req as any).userId = token;
-          (req as any).userEmail = token === "usr-demo" ? "demo@memora.ai" : "user@example.com";
+          (req as any).userEmail =
+            token === "usr-demo"
+              ? "demo@memora.ai"
+              : "user@example.com";
           return next();
         }
-        return res.status(401).json({ error: "Invalid session or login credentials" });
+
+        return res.status(401).json({
+          error: "Invalid session or login credentials"
+        });
       }
+
       (req as any).userId = user.id;
       (req as any).userEmail = user.email;
-      next();
+
+      return next();
+
     } catch (err) {
-      console.error("Backend Supabase Auth Verification Error:", err);
-      return res.status(401).json({ error: "Authentication check failed" });
+      console.error(err);
+      return res.status(401).json({
+        error: "Authentication check failed"
+      });
     }
   } else {
-    // Demo Mode: Accept passed ID directly as token
     (req as any).userId = token;
-    (req as any).userEmail = token === "usr-demo" ? "demo@memora.ai" : "user@example.com";
-    next();
+    (req as any).userEmail =
+      token === "usr-demo"
+        ? "demo@memora.ai"
+        : "user@example.com";
+
+    return next();
   }
 };
-
 // REST API Endpoints
 
 // 1. Get all notes
@@ -595,17 +640,20 @@ ${attachmentsContext || "No text attachments associated with this note."}
     });
 
     // Execute generateContent using the correct SDK pattern
+    // Execute generateContent using the correct SDK pattern
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: contents,
       config: {
         systemInstruction: systemInstruction,
         temperature: 0.7
       }
     });
+    console.log("Gemini Response:", response);
 
+    // FIX: Access response.text directly as a string property
     res.json({
-      reply: response.text || "I was unable to generate a response from the note context.",
+      reply: response.text || "I was unable to generate a response.",
       actionUsed: quickAction || null
     });
 

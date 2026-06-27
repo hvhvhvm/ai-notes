@@ -88,19 +88,7 @@ export default function App() {
     }
     return {};
   };
-
-  // Fetch initial notes whenever the authenticated user state changes
-  useEffect(() => {
-    if (user) {
-      fetchNotes();
-    } else {
-      setNotes([]);
-      setSelectedNoteId(null);
-      setIsLoading(false);
-    }
-  }, [user?.id]);
-
-  const fetchNotes = async () => {
+   const fetchNotes = async () => {
     setIsLoading(true);
     try {
       const headers = await getAuthHeaders();
@@ -121,6 +109,18 @@ export default function App() {
     }
   };
 
+  // Fetch initial notes whenever the authenticated user state changes
+  useEffect(() => {
+    if (user) {
+      fetchNotes();
+    } else {
+      setNotes([]);
+      setSelectedNoteId(null);
+      setIsLoading(false);
+    }
+  }, [user?.id]);
+
+ 
   const showError = (msg: string) => {
     setErrorNotification(msg);
     setTimeout(() => {
