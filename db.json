@@ -51,11 +51,11 @@
     {
       "id": "note-1782559171619-6798",
       "title": "Quantum Physics & Wave Mechanics",
-      "content": "# Lecture 3: Wave-Particle Duality and Schrödinger Equation\n\nWelcome to the physics study notes. This document contains key derivations and summaries for the upcoming mid-term exam.\n\n## 1. De Broglie Wavelength\nThe wave-particle duality is expressed by:\n$$\\lambda = \\frac{h}{p}$$\nwhere:\n* $h$ is Planck's constant ($6.626 \\times 10^{-34}\\text{ J s}$)\n* $p$ is the momentum ($mv$)\n\n## 2. Schrödinger Wave Equation\nThe time-independent Schrödinger equation is:\n$$\\hat{H}\\psi = E\\psi$$\n\nOr in position space:\n$$-\\frac{\\hbar^2}{2m} \\frac{d^2\\psi}{dx^2} + V(x)\\psi = E\\psi$$\n\n### Important Postulates:\n1. The wave function $\\psi(x)$ must be single-valued, continuous, and normalizable.\n2. The probability of finding a particle in the interval $[a, b]$ is given by:\n   $$P = \\int_{a}^{b} |\\psi(x)|^2 dx$$\n\n## 3. Exam Topics to Focus On:\n- [x] Derivation of Infinite Square Well energy levels\n- [ ] Quantum tunneling coefficients\n- [x] Normalization of gaussian wave packets\n- [ ] Harmonic Oscillator ladder operators\n\nFeel free to ask the AI Knowledge Assistant to summarize these notes or generate a practice quiz!",
+      "content": "# Lecture 3: Wave-Particle Duality and Schrödinger Equation\n\nWelcome to the physics study notes. This document contains key derivations and summaries for the upcoming mid-term exam.\n\n## 1. De Broglie Wavelength\nThe wave-particle duality is expressed by:\n$$\\lambda = \\frac{h}{p}$$\nwhere:\n* $h$ is Planck's constant ($6.626 \\times 10^{-34}\\text{ J s}$)\n* $p$ is the momentum ($mv$)\nmy name maximus\n## 2. Schrödinger Wave Equation\nThe time-independent Schrödinger equation is:\n$$\\hat{H}\\psi = E\\psi$$\n\nOr in position space:\n$$-\\frac{\\hbar^2}{2m} \\frac{d^2\\psi}{dx^2} + V(x)\\psi = E\\psi$$\n\n### Important Postulates:\n1. The wave function $\\psi(x)$ must be single-valued, continuous, and normalizable.\n2. The probability of finding a particle in the interval $[a, b]$ is given by:\n   $$P = \\int_{a}^{b} |\\psi(x)|^2 dx$$\n\n## 3. Exam Topics to Focus On:\n- [x] Derivation of Infinite Square Well energy levels\n- [ ] Quantum tunneling coefficients\n- [x] Normalization of gaussian wave packets\n- [ ] Harmonic Oscillator ladder operators\n\nFeel free to ask the AI Knowledge Assistant to summarize these notes or generate a practice quiz!",
       "folder": "College",
       "favorite": true,
       "createdAt": "2026-06-27T11:19:31.622Z",
-      "updatedAt": "2026-06-27T11:19:31.622Z",
+      "updatedAt": "2026-06-28T05:00:44.036Z",
       "attachments": [
         {
           "id": "att-1",

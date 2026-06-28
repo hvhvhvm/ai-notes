@@ -9,6 +9,8 @@ import { useAuth } from "./context/AuthContext";
 import AuthScreen from "./components/AuthScreen";
 import { supabase } from "./lib/supabase";
 
+const API_URL = ((import.meta as any).env?.VITE_API_URL || "").trim();
+
 export default function App() {
   const { user, loading: authLoading } = useAuth();
   const [notes, setNotes] = useState<Note[]>([]);
@@ -92,7 +94,7 @@ export default function App() {
     setIsLoading(true);
     try {
       const headers = await getAuthHeaders();
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes`, {
+      const res = await fetch(`${API_URL}/api/notes`, {
                                         headers,
                                       });
       if (!res.ok) throw new Error("Failed to load notes");
@@ -137,7 +139,7 @@ export default function App() {
       const baseTitle = activeNote ? activeNote.title : "Untitled Note";
       const title = `AI Study: ${baseTitle}`;
       
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes`, {
+      const res = await fetch(`${API_URL}/api/notes`, {
         method: "POST",
         headers: { 
           ...headers,
@@ -178,7 +180,7 @@ export default function App() {
   const handleCreateNote = async () => {
     try {
       const headers = await getAuthHeaders();
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes`, {
+      const res = await fetch(`${API_URL}/api/notes`, {
         method: "POST",
         headers: { 
           ...headers,
@@ -207,7 +209,7 @@ export default function App() {
     e.stopPropagation();
     try {
       const headers = await getAuthHeaders();
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`, {
+      const res = await fetch(`${API_URL}/api/notes/${id}`, {
         method: "DELETE",
         headers
       });
@@ -239,7 +241,7 @@ export default function App() {
 
     try {
       const headers = await getAuthHeaders();
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${selectedNoteId}`, {
+      const res = await fetch(`${API_URL}/api/notes/${selectedNoteId}`, {
         method: "PUT",
         headers: { 
           ...headers,
@@ -271,7 +273,7 @@ export default function App() {
 
     try {
       const headers = await getAuthHeaders();
-      await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${id}`, {
+      await fetch(`${API_URL}/api/notes/${id}`, {
         method: "PUT",
         headers: { 
           ...headers,
@@ -290,7 +292,7 @@ export default function App() {
     
     try {
       const headers = await getAuthHeaders();
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${selectedNoteId}/attachments`, {
+      const res = await fetch(`${API_URL}/api/notes/${selectedNoteId}/attachments`, {
         method: "POST",
         headers: {
           ...headers,
@@ -325,7 +327,7 @@ export default function App() {
 
     try {
       const headers = await getAuthHeaders();
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${selectedNoteId}/attachments/${attachmentId}`, {
+      const res = await fetch(`${API_URL}/api/notes/${selectedNoteId}/attachments/${attachmentId}`, {
         method: "DELETE",
         headers
       });
@@ -383,7 +385,7 @@ export default function App() {
 
     try {
       const headers = await getAuthHeaders();
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/notes/${noteId}/ask-ai`, {
+      const res = await fetch(`${API_URL}/api/notes/${noteId}/ask-ai`, {
         method: "POST",
         headers: { 
           ...headers,
