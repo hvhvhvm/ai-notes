@@ -673,15 +673,31 @@ ${attachmentsContext || "No text attachments associated with this note."}
     });
 
     // Execute generateContent using the correct SDK pattern
-    // Execute generateContent using the correct SDK pattern
-    const response = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: contents,
-      config: {
-        systemInstruction: systemInstruction,
-        temperature: 0.7
+    let response;
+    try {
+      response = await ai.models.generateContent({
+        model: "gemini-2.5-flash",
+        contents: contents,
+        config: {
+          systemInstruction: systemInstruction,
+          temperature: 0.7
+        }
+      });
+    } catch (primaryError: any) {
+      if (primaryError?.status === 503 || primaryError?.message?.includes("503") || primaryError?.message?.includes("high demand")) {
+        console.warn("Gemini 2.5 Flash is busy (503). Falling back to gemini-1.5-flash...");
+        response = await ai.models.generateContent({
+          model: "gemini-1.5-flash",
+          contents: contents,
+          config: {
+            systemInstruction: systemInstruction,
+            temperature: 0.7
+          }
+        });
+      } else {
+        throw primaryError;
       }
-    });
+    }
     console.log("Gemini Response:", response);
 
     // FIX: Access response.text directly as a string property
