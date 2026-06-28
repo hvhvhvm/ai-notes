@@ -13,11 +13,22 @@ const PORT = Number(process.env.PORT) || 3000;
 const DB_FILE = path.join(process.cwd(), "db.json");
 
 app.use(cors({
-  origin: [
-    "http://localhost:3000",
-    "http://localhost:5173",
-    "https://ai-notes-saicharanreddykandi-7709s-projects.vercel.app"
-  ],
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      "http://localhost:3000",
+      "http://localhost:5173",
+      "https://ai-notes-saicharanreddykandi-7709s-projects.vercel.app"
+    ];
+    
+    // Allow localhost, the main Vercel URL, and any Vercel preview URLs
+    if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith(".vercel.app")) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
   methods: ["GET","POST","PUT","DELETE","OPTIONS"],
   allowedHeaders: ["Content-Type","Authorization"]
