@@ -99,6 +99,58 @@
       "updatedAt": "2026-06-27T11:19:31.622Z",
       "attachments": [],
       "userId": "67ddd177-4079-4b48-a1ce-75245e2f3fcc"
+    },
+    {
+      "id": "note-1782624523678-9741",
+      "title": "Quantum Physics & Wave Mechanics",
+      "content": "# Lecture 3: Wave-Particle Duality and Schrödinger Equation\n\nWelcome to the physics study notes. This document contains key derivations and summaries for the upcoming mid-term exam.\n\n## 1. De Broglie Wavelength\nThe wave-particle duality is expressed by:\n$$\\lambda = \\frac{h}{p}$$\nwhere:\n* $h$ is Planck's constant ($6.626 \\times 10^{-34}\\text{ J s}$)\n* $p$ is the momentum ($mv$)\n\n## 2. Schrödinger Wave Equation\nThe time-independent Schrödinger equation is:\n$$\\hat{H}\\psi = E\\psi$$\n\nOr in position space:\n$$-\\frac{\\hbar^2}{2m} \\frac{d^2\\psi}{dx^2} + V(x)\\psi = E\\psi$$\n\n### Important Postulates:\n1. The wave function $\\psi(x)$ must be single-valued, continuous, and normalizable.\n2. The probability of finding a particle in the interval $[a, b]$ is given by:\n   $$P = \\int_{a}^{b} |\\psi(x)|^2 dx$$\n\n## 3. Exam Topics to Focus On:\n- [x] Derivation of Infinite Square Well energy levels\n- [ ] Quantum tunneling coefficients\n- [x] Normalization of gaussian wave packets\n- [ ] Harmonic Oscillator ladder operators\n\nFeel free to ask the AI Knowledge Assistant to summarize these notes or generate a practice quiz!",
+      "folder": "College",
+      "favorite": true,
+      "createdAt": "2026-06-28T05:28:43.678Z",
+      "updatedAt": "2026-06-28T05:28:43.678Z",
+      "attachments": [
+        {
+          "id": "att-1",
+          "name": "Syllabus_Physics301.txt",
+          "type": "text/plain",
+          "size": 432,
+          "data": "Course: PHYS 301 - Quantum Mechanics I\nInstructor: Dr. Angela Vance\nOffice Hours: Mon/Wed 2-4 PM\n\nWeekly Topics:\nWeek 1: Experimental Origins of Quantum Mechanics\nWeek 2: Wave Mechanics and Wave Functions\nWeek 3: Schrödinger Equation & Infinite Wells\nWeek 4: Quantum Harmonic Oscillator\nWeek 5: Mid-term Examination (July 15)\n\nGrading Criteria:\nHomework: 30%\nMid-term: 35%\nFinal Project: 35%"
+        }
+      ],
+      "userId": "usr-demo"
+    },
+    {
+      "id": "note-1782624523678-5074",
+      "title": "AI Agent Architecture with LLMs",
+      "content": "# Core Patterns of Autonomous AI Agents\n\nAI Agents go beyond simple prompt-response loops. They employ planning, memory, and tool usage to execute complex workflows.\n\n## 1. The Agent Loop\nAn agent consists of three fundamental layers:\n1. **Planning**: Decomposing complex tasks into smaller sub-goals (e.g., Chain of Thought, ReAct).\n2. **Memory**: Short-term (in-context conversation) and Long-term (retrieval-augmented vector storage).\n3. **Tools**: External APIs, code execution runtimes, search engines, and document readers.\n\n```\n   +------------------+\n   |   User Prompt    |\n   +--------+---------+\n            |\n            v\n   +--------+---------+      +-------------------+\n   |   Planning &     | <---> |  Memory           |\n   |   Reasoning Loop |      |  (Short/Long term)|\n   +--------+---------+      +-------------------+\n            |\n            +------------+\n            |            |\n            v            v\n      +-----+----+  +----+----+\n      | Tool Use |  | Final   |\n      | (APIs)   |  | Answer  |\n      +----------+  +---------+\n```\n\n## 2. ReAct Framework\nReAct (Reasoning and Acting) structures the agent prompt as:\n- **Thought**: The reasoning step explaining what the agent is doing.\n- **Action**: The specific tool call to execute.\n- **Observation**: The output returned by the tool.\n\n## 3. Current State of the Art\n* **LangGraph**: Stateful, multi-agent orchestrator.\n* **AutoGPT / CrewAI**: Multi-agent workspaces where specialists collaborate on user tasks.\n* **Tool Calling**: Native JSON output support by models like Gemini 3.5.",
+      "folder": "AI",
+      "favorite": true,
+      "createdAt": "2026-06-28T05:28:43.678Z",
+      "updatedAt": "2026-06-28T05:28:43.678Z",
+      "attachments": [],
+      "userId": "usr-demo"
+    },
+    {
+      "id": "note-1782624523678-1495",
+      "title": "SaaS Launch Checklist",
+      "content": "# Memora Startup Execution Plan\n\nDetailed timeline for shipping the product to beta testers and preparing the Product Hunt launch.\n\n## Phase 1: MVP Hardening\n- [x] Complete local persistence model\n- [x] Implement rich text markdown editor with markdown rendering\n- [x] Add floating AI Knowledge Assistant drawer\n- [ ] Connect multi-workspace organization folders\n- [ ] Deploy test container on Cloud Run\n\n## Phase 2: Landing Page & Lead Gen\n* **Pitch Deck**: Simple 10-slide deck summarizing the AI knowledge base concept.\n* **Slogan**: *\"Every note is an interactive AI-powered second brain.\"*\n* **Pricing Models**:\n  - **Free Tier**: 5 active notes, 10 AI queries/day.\n  - **Premium Tier**: Unlimited notes, 20MB attachments, unlimited Gemini-3.5 queries ($9/mo).\n\n## Phase 3: Launch Strategy\n1. **Hacker News**: Post an elegant \"Show HN: Memora\" thread detailing our tech stack.\n2. **Product Hunt**: Launch on a Tuesday at 12:01 AM PST.\n3. **Twitter/X**: Share short screen recordings demonstrating drag-and-drop PDF attachments and rapid AI flashcard creation.",
+      "folder": "Startup",
+      "favorite": false,
+      "createdAt": "2026-06-28T05:28:43.678Z",
+      "updatedAt": "2026-06-28T05:28:43.678Z",
+      "attachments": [],
+      "userId": "usr-demo"
+    },
+    {
+      "id": "note-1782624523678-8615",
+      "title": "Kyoto Itinerary & Travel Prep",
+      "content": "# Kyoto Exploration Guide: Autumn 2026\n\nNotes on historical sights, local dining, and transportation options for our 5-day stay.\n\n## 1. Sights to See\n* **Fushimi Inari Shrine**: Early morning visit to beat the crowds (6:30 AM arrival).\n* **Kinkaku-ji (Golden Pavilion)**: Golden hour photography (around 4:00 PM).\n* **Arashiyama Bamboo Grove**: Beautiful scenery, includes walk through Tenryu-ji temple.\n* **Gion District**: Walk in the late evening, look for traditional tea houses.\n\n## 2. Packing Essentials\n- [ ] Pasmo/Suica card loaded on phone\n- [ ] Comfortable walking shoes (target: 20,000 steps/day)\n- [ ] Lightweight rain jacket\n- [ ] Japanese electrical adapter (flat 2-pin)\n\n## 3. Traditional Food List\n- [x] Kyoto-style Kaiseki dinner (Pre-booked at Gion Karyo)\n- [ ] Fresh Matcha in Uji\n- [ ] Yudofu (Simmered tofu specialty)\n- [ ] Nishiki Market street snacks",
+      "folder": "Travel",
+      "favorite": false,
+      "createdAt": "2026-06-28T05:28:43.678Z",
+      "updatedAt": "2026-06-28T05:28:43.678Z",
+      "attachments": [],
+      "userId": "usr-demo"
     }
   ]
 }

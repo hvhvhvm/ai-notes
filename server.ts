@@ -218,12 +218,25 @@ let memoryDB: DB | null = null;
 
 function readDB(): DB {
   if (memoryDB) {
+    if (!Array.isArray(memoryDB.notes)) {
+      memoryDB.notes = [];
+    }
     return memoryDB;
   }
   try {
     if (fs.existsSync(DB_FILE)) {
       const content = fs.readFileSync(DB_FILE, "utf-8");
+      if (!content.trim()) {
+        memoryDB = { notes: SAMPLE_NOTES };
+        return memoryDB;
+      }
       memoryDB = JSON.parse(content);
+      if (!memoryDB || typeof memoryDB !== "object") {
+        memoryDB = { notes: SAMPLE_NOTES };
+      }
+      if (!Array.isArray(memoryDB.notes)) {
+        memoryDB.notes = [];
+      }
       return memoryDB!;
     }
   } catch (err) {

@@ -9,7 +9,7 @@ import { useAuth } from "./context/AuthContext";
 import AuthScreen from "./components/AuthScreen";
 import { supabase } from "./lib/supabase";
 
-const API_URL = ((import.meta as any).env?.VITE_API_URL || "").trim();
+const API_URL = (import.meta.env.VITE_API_URL || "").trim();
 
 export default function App() {
   const { user, loading: authLoading } = useAuth();
