@@ -215,11 +215,17 @@ Notes on historical sights, local dining, and transportation options for our 5-d
   }
 ];
 
+let memoryDB: DB | null = null;
+
 function readDB(): DB {
+  if (memoryDB) {
+    return memoryDB;
+  }
   try {
     if (fs.existsSync(DB_FILE)) {
       const content = fs.readFileSync(DB_FILE, "utf-8");
-      return JSON.parse(content);
+      memoryDB = JSON.parse(content);
+      return memoryDB!;
     }
   } catch (err) {
     console.error("Error reading database file, resetting to samples:", err);
@@ -228,10 +234,12 @@ function readDB(): DB {
   // Initialize with sample notes
   const initialDB: DB = { notes: SAMPLE_NOTES };
   writeDB(initialDB);
+  memoryDB = initialDB;
   return initialDB;
 }
 
 function writeDB(data: DB) {
+  memoryDB = data;
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), "utf-8");
   } catch (err) {
@@ -683,9 +691,13 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[Memora] Express server running at http://localhost:${PORT}`);
-  });
+  if (!process.env.VERCEL) {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`[Memora] Express server running at http://localhost:${PORT}`);
+    });
+  }
 }
 
 startServer();
+
+export default app;
