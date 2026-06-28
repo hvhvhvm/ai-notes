@@ -563,9 +563,11 @@ app.post("/api/notes/:id/ask-ai", authenticateUser, async (req, res) => {
       attachmentsContext += `\n--- ATTACHMENT FILENAME: ${att.name} ---\n${rawText}\n`;
     });
 
-    // Prepare media files (images) to pass as inline data to Gemini-3.5-flash
-    const imageAttachments = note.attachments.filter((att) => att.type.startsWith("image/"));
-    const imageParts = imageAttachments.map((att) => {
+    // Prepare media files (images, PDFs) to pass as inline data to Gemini
+    const mediaAttachments = note.attachments.filter((att) => 
+      att.type.startsWith("image/") || att.type === "application/pdf" || att.name.endsWith(".pdf")
+    );
+    const mediaParts = mediaAttachments.map((att) => {
       let base64Data = "";
       if (att.data.includes("base64,")) {
         base64Data = att.data.split("base64,")[1];
@@ -574,7 +576,7 @@ app.post("/api/notes/:id/ask-ai", authenticateUser, async (req, res) => {
       }
       return {
         inlineData: {
-          mimeType: att.type,
+          mimeType: att.type === "application/pdf" || att.name.endsWith(".pdf") ? "application/pdf" : att.type,
           data: base64Data
         }
       };
@@ -660,8 +662,8 @@ ${attachmentsContext || "No text attachments associated with this note."}
     // Add the current prompt and any inline image attachments to the final user message
     const currentParts: any[] = [{ text: finalPrompt }];
     
-    // Feed images directly to the parts array for multimodal analysis
-    imageParts.forEach((part) => {
+    // Feed media (images, PDFs) directly to the parts array for multimodal analysis
+    mediaParts.forEach((part) => {
       currentParts.push(part);
     });
 
